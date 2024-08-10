@@ -1,0 +1,19 @@
+pipeline {
+  agent any
+
+
+  stages {
+    stage('get actual repo git') {
+      steps {
+        script {
+            if (fileExists('/var/lib/jenkins/certification_work_0824')) {
+                sh 'cd /var/lib/jenkins/certification_work_0824/ && git pull'
+            }    
+            else{
+                sh 'cd /var/lib/jenkins/ && git clone https://github.com/TrSverre/certification_work_0824.git'    
+            }
+        }
+      }
+    }
+  }
+}
