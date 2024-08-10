@@ -17,7 +17,7 @@ pipeline {
     }
     stage('Terraform init and appluy') {
       steps {
-        sh 'cd /var/lib/jenkins/certification_work_0824 &&  export YC_CLOUD_ID=$(yc config get cloud-id) && export YC_FOLDER_ID=$(yc config get folder-id) && export YC_TOKEN=$(yc iam create-token) && terraform init && terraform apply -auto-approve'
+        sh 'cd /var/lib/jenkins/ &&  export YC_CLOUD_ID=$(cat cloud) && export YC_FOLDER_ID=$(cat folder) && export YC_TOKEN=$(cat token) && cd /var/lib/jenkins/certification_work_0824 && terraform init && terraform apply -auto-approve'
       }
     }
   }
