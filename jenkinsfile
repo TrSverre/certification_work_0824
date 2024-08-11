@@ -27,7 +27,7 @@ pipeline {
     }
     stage('ansible playbook start') {
       steps {
-        sh 'cd /var/lib/jenkins/certification_work_0824 && ansible-playbook certPlaybook.yml -u user --extra-vars "myrepo = $(terraform output -raw myrepo)"'
+        sh 'cd /var/lib/jenkins/certification_work_0824 && ansible-playbook certPlaybook.yml -u user'
       }
     }
   }

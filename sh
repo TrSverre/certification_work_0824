@@ -8,3 +8,4 @@ echo "[prod]" >> /etc/ansible/hosts
 echo "server1 ansible_host=$(terraform output -raw ipprod)" >> /etc/ansible/hosts
 echo "[all:vars]" >> /etc/ansible/hosts
 echo "ansible_python_interpreter=/usr/bin/python3" >> /etc/ansible/hosts
+echo "myrepo=$(terraform output -raw myrepo)" >> /etc/ansible/hosts
