@@ -14,10 +14,10 @@ variable "paramsvm" {
   description = "параметры машин"
   type        = map(string)
   default     = {
-    namevm1     = "prod",
+    namevm1     = "build",
     cor1        = 2,
     mem1        = 2,
-    namevm2     = "build",
+    namevm2     = "prod",
     cor2        = 2,
     mem2        = 2,
   }

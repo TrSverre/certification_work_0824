@@ -1,0 +1,33 @@
+- name: installed docker
+  hosts: all
+  become: true
+
+  tasks:
+
+  - name: Ensure pip3 is present
+    apt:
+      update_cache: yes
+      name: python3-pip
+      state: present
+
+  - name: Ensure requests is present
+    become: true
+    pip:
+      name: requests
+      executable: pip3
+
+  - name: Ensure docker-py is present
+    become: true
+    pip:
+      name: docker-py
+      state: present
+
+  - name: Ensure docker is present
+    apt:
+      name: docker.io
+      state: present
+
+  - name: Ensure docker is started
+    service:
+      name: docker
+      state: started
