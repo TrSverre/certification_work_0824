@@ -31,3 +31,48 @@
     service:
       name: docker
       state: started
+  
+- name: building
+  hosts: bild
+  become: true   
+  
+  tasks:
+  - name: copy dockerfile
+    copy:
+      src: /var/lib/jenkins/certification_work_0824/dockerfile
+      dest: /home/user
+
+  - name: docker build 
+    become: true
+    docker_image:
+      path: /home/user
+      name: prob1
+      tag: latest
+  
+  - name: tag image in repo
+    become: true
+    docker_image:
+      name: prob1
+      tag: latest
+      repository: cr.yandex/{{ myrepo }}/prob1
+      push: yes
+
+- name: run in prod
+  hosts: prod
+  become: true
+
+  tasks:
+  - name: pull image
+    become: true
+    docker_image:
+      name: cr.yandex/{{ myrepo }}/prob1
+      tag: latest
+
+  - name: Run 
+    become: true
+    docker_container:
+      name: prod
+      image: cr.yandex/{{ myrepo }}/prob1
+      state: started
+      ports:
+        - "8080:8080"

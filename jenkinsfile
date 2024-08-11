@@ -20,14 +20,14 @@ pipeline {
         sh 'cd /var/lib/jenkins/ &&  export YC_CLOUD_ID=$(cat cloud) && export YC_FOLDER_ID=$(cat folder) && export YC_TOKEN=$(cat token) && cd /var/lib/jenkins/certification_work_0824 && terraform init && terraform apply -auto-approve'
       }
     }
-    stage('sh') {
+    stage('update file hosts') {
       steps {
         sh 'cd /var/lib/jenkins/certification_work_0824 && bash sh'
       }
     }
-    stage('ansible') {
+    stage('ansible playbook start') {
       steps {
-        sh 'cd /var/lib/jenkins/certification_work_0824 && ansible-playbook certPlaybook.yml -u user'
+        sh 'cd /var/lib/jenkins/certification_work_0824 && ansible-playbook certPlaybook.yml -u user --extra-vars "myrepo = $(terraform output -raw myrepo)"'
       }
     }
   }
