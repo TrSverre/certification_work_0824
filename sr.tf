@@ -57,11 +57,11 @@ resource "yandex_compute_instance" "vm-1" {
     private_key = file("/var/lib/jenkins/.ssh/id_rsa")
     host = yandex_compute_instance.vm-1.network_interface.0.nat_ip_address
   }
-  provisioner "remote-exec" {
-    inline = [
-      "sudo apt update",   
-    ]
-  }
+  #provisioner "remote-exec" {
+  #  inline = [
+  #    "sudo apt update",   
+  #  ]
+  #}
 
 }
 
@@ -101,11 +101,11 @@ resource "yandex_compute_instance" "vm-2" {
     private_key = file("/var/lib/jenkins/.ssh/id_rsa")
     host = yandex_compute_instance.vm-2.network_interface.0.nat_ip_address
   }
-  provisioner "remote-exec" {
-    inline = [
-      "sudo apt update",   
-    ]
-  }
+  #provisioner "remote-exec" {
+  #  inline = [
+  #    "sudo apt update",   
+  #  ]
+  #}
 }
 
 resource "yandex_compute_disk" "hddvm2" {
