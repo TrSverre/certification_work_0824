@@ -136,3 +136,13 @@ resource "yandex_container_registry_iam_binding" "pusher" {
     "system:allUsers",
   ]
 }
+
+output "ipbild" {
+  value = yandex_compute_instance.vm-1.network_interface.0.nat_ip_address
+}
+output "ipprod" {
+  value = yandex_compute_instance.vm-2.network_interface.0.nat_ip_address
+}
+output "myrepo"{
+  value = yandex_container_registry.my-reg.id
+}
